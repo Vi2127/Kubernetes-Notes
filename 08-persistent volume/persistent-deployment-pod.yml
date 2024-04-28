@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: pod_deployment
+spec:
+  replicas: 2
+  selectors:
+    matchLabels:
+      name: pv_pod_deployment
+  template:
+    metadata:
+      labels:
+        name: pv_pod_deployment
+    spec:
+      containers:
+        - name: con1
+          images: centos
+          command: ["/bin/bash", "-c", "sleep 1000"]
+          volumeMounts:
+            - name: con_vol
+              mountPath: "/tmp/persistent"
+      volumes:
+        - name: con_vol
+          persistentVolumeClaim:
+            claimName: persistent_volume_claim            # must be same as persistent-volume-claim.yml file

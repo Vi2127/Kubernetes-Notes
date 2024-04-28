@@ -1,0 +1,16 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: resource                        # pod name
+spec: 
+  containers:
+    - name: con01
+      image: ubuntu
+      command: ["/bin/bash","-c","while true; do echo hello world; sleep 500; done"]
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "101m"
+        limits:
+          memory: "128Mi"
+          cpu: "200m"

@@ -1,0 +1,24 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata: 
+  name: hpa_resource
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: hpa-pods
+  template:
+    metadata:
+      name: testpods
+      labels:
+        name: hpa-pods
+  spec:
+    containers:
+      - name: con01
+        image: ubuntu
+        command: ["/bin/bash", "-c", "while true; do echo hello world; sleep 5000; done"]
+        resources:
+          requests:
+            cpu: 200m
+          limits:
+            cpu: 400m

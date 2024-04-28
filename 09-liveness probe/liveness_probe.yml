@@ -1,0 +1,22 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: liveness_probe
+  labels:
+    test: liveness_probe
+spec:
+  containers:
+    - name: con1
+      image: ubuntu
+      args: 
+      - /bin/bash
+      - -c
+      - touch /tmp/healthy; sleep 1000
+      livenessProbe:
+        exec: 
+          command:                                     # can run any command based on our application
+          - cat
+          - /tmp/healthy
+        initialDelaySeconds: 5                         # wait for this specific time before it runs very first probe.
+        periodSecond: 20                               # after every 20 second it will run live-probe
+        timeoutSecond: 60                              # if no response get (0 or 1) then after this time pod will re-create.

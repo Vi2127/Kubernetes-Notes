@@ -1,0 +1,10 @@
+kind: Service
+metadata:
+  name: demoService 
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+  selectors:
+    name: dev_pods                     # this must match with labels in deployment file

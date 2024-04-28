@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: apps/v1
+metadata:
+  name: demoservice
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    name: dev-pods                  # this must match with labels in deployment file

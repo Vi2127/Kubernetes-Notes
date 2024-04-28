@@ -1,0 +1,16 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nodelabels
+  labels:
+    env: dev
+    date: 22/04/2024
+spec:
+  containers:
+    - name: con01
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Hello world; sleep 5; done"]
+      ports:
+        - containerPort: 8080
+  nodeSelector:
+    hardware: t2-medium         # node selector

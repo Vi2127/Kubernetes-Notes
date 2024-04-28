@@ -1,0 +1,23 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: test-pod
+spec:
+  containers:                     # can have multiple containers inside pod (tightly-coupled) and share same IP address
+    - name: con01
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Testing Pods; sleep 5; done"]
+      env:                        # declare env variable 
+        - env-name: dev           # can have more than 1
+          date: 22/04/2024
+          creator: vj
+
+    - name: con02
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Running in 2nd container; sleep 5; done"]
+
+    - name: con03
+      image: httpd
+      command: ["/bin/bash", "-c", "echo httpd container"]
+      ports:
+        - containerPort: 80       # open container port 

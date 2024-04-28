@@ -1,0 +1,15 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+ name: job_pod
+spec:
+ schedule: "* * * * *"
+ jobTemplate:
+   spec:
+     template:
+       spec:
+         containers:
+         - image: ubuntu
+           name: job_pods
+           command: ["/bin/bash", "-c", "echo hello world; sleep 5"]
+         restartPolicy: Never

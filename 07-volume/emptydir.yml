@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1
+metadata: 
+  name: emptydir_pods
+spec: 
+  containers:
+    - name: con1
+      image: centos
+      command: ["/bin/bash", "-c", "sleep 2000"]
+      volumeMounts:
+        - name: xchange
+          mountPath: "/tmp/xchange"                 # file store at this location will be visible to 2nd container's volume path "/tmp/data"
+    - name: con2
+      image: centos
+      command: ["bin/bash", "-c", "sleep 1000"]
+      volumeMounts:
+        - name: xchange
+          mountPath: "/tmp/data"                    # file store at this location will be visible to 1st container's volume path "/tmp/xchange"
+  volumes:
+    - name: xchange
+      emptyDir: {}

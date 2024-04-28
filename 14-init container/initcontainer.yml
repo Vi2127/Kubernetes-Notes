@@ -1,0 +1,19 @@
+kind: Pod
+apiVersion: v1
+metadata: 
+  name: initcontainer
+spec:
+  initContainers:
+  - name: con01
+    image: centos
+    command: ["/bin/bash", "-c", "echo hello world > /tmp/exchange/hello.txt; sleep 1000"]
+    volumeMounts:
+      - name: xchange
+        mountPaths: "/tmp/xchange"
+  containers:
+  - name: con02
+    image: contos
+    command: ["/bin/bash", "-c", "while true; do echo cat /tmp/data/hello.txt; sleep 1000; done"]
+    volumeMounts:
+      - name: xchange
+        mountPaths: "/tmp/data"

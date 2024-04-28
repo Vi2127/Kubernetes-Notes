@@ -1,0 +1,18 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: replica
+spec:
+  replicas: 2
+  selector:
+    myname: vj                    
+  template:
+    metadata:
+      name: replicaset
+      labels:
+        myname: vj                # this should match with met-container above from selector
+    spec:
+      containers:
+        - name: con01
+          image: ubuntu
+          commmand: ["/bin/bash", "-c", "while true; do echo replica set; sleep 5; done"]        

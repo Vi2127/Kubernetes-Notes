@@ -1,0 +1,12 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: test-pod
+  labels:
+    name: pods
+spec:
+  containers:
+    - name: con01
+      image: ubuntu
+      command: ["/bin/bash","-c","while true; do echo Hello world; sleep 1000"]
+       

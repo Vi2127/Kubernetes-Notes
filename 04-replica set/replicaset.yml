@@ -1,0 +1,20 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: myreplicaset
+spec:
+  replicas: 4
+  selector:
+    matchExpressions:
+      - {key: myname, operator: In, values: [vj, vijay, Vj]}
+      - {key: env, operator: NotIn, values: [prod]}
+  template:
+    metadata:
+      name: testpod
+      labels:
+        myname: vj  
+    spec:
+      containers:
+        - name: con01
+          image: ubuntu
+          command: [""]

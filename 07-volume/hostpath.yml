@@ -1,0 +1,16 @@
+kind: Pod
+apiVersion: v1
+metadata: 
+  name: hostpath_volume
+spec:
+  containers:
+    - name: con1
+      image: centos
+      command: ["/bin/bash", "-c", "sleep 1000"]
+      volumeMounts:
+        - name: host_volume
+          mountPath: /tmp/host                  # file store at this location will be visible from host machine at path "/tmp/data"
+  volumes:
+    - name: host_volume
+      hostPath:
+        path: /tmp/data                         # file store at this location will be visible from container at path "/tmp/host"
